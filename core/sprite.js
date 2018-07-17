@@ -3,4 +3,8 @@ class Sprite extends Rectangle {
     super(x, y, w, h);
     this.alive = true;
   }
+
+  render(rect) {
+    throw "Not Implemented";
+  }
 }
