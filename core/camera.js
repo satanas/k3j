@@ -25,18 +25,10 @@ class Camera {
     return new Vector(v.x - this.offsetX, v.y - this.offsetY);
   }
 
-  transformRect(r) {
-    let rect = new Rectangle(r.x - this.offsetX,
-                             r.y - this.offsetY,
-                             r.w,
-                             r.h);
-    rect.bounds.
-  }
-
   // Indicates if the object is inside the viewport.
   // Used to avoid rendering objects outside the view
   inView(obj) {
-    let r = Rect.offset(obj, offsetX, offsetY);
+    let r = Rect.offset(obj, this.offsetX, this.offsetY);
     return ((r.bounds.right >= 0 && r.bounds.right <= this.width) || (r.x >= 0 && r.x <= this.width)) &&
            ((r.bounds.bottom >= 0 && r.bounds.bottom <= this.height) || (r.y >= 0 && r.y <= this.height));
   }
