@@ -30,6 +30,14 @@ function resize() {
   $.canvas.style.height = h+'px';
 }
 
+$.raf = window.requestAnimationFrame ||
+  window.webkitRequestAnimationFrame ||
+  window.mozRequestAnimationFrame ||
+  function(a){ window.setTimeout(a,1E3/60); };
+
+$.caf = window.cancelAnimationFrame ||
+  window.mozCancelAnimationFrame;
+
 window.addEventListener('load', () => {
   init();
   resize();
