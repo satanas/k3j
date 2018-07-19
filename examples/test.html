@@ -19,11 +19,25 @@
   <!-- End imports -->
 <script>
   let ENTER = 13,
-      KEY_A = 65;
+      KEY_A = 65,
+      LEFT = 37,
+      RIGHT = 39;
 
   class Player extends Sprite {
     constructor() {
       super(100, 100, 64, 64);
+      this.speed = 1;
+    }
+
+    update(dt) {
+      let dx = 0;
+      if ($.input.isPressed(LEFT)) {
+        dx = -this.speed * dt;
+      }
+      if ($.input.isPressed(RIGHT)) {
+        dx = this.speed * dt;
+      }
+      this.x += dx;
     }
 
     render(rect) {
@@ -44,6 +58,8 @@
         console.log('hello world');
       }
 
+      this.player.update(this.deltaTime);
+
       $.cam.clear();
 
       $.cam.render(this.player);
@@ -53,7 +69,7 @@
 
   $.init(); // init(['collisions', 'sound', 'astar', ...])
   // Bind keyboard
-  $.input.bind([ENTER, KEY_A]);
+  $.input.bind([ENTER, KEY_A, LEFT, RIGHT]);
 
   var scene = new GameScene();
   scene.start();
