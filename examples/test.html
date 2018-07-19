@@ -18,6 +18,9 @@
   <script src="../core/animator.js"></script>
   <!-- End imports -->
 <script>
+  let ENTER = 13,
+      KEY_A = 65;
+
   class GameScene extends Scene {
     constructor() {
       super();
@@ -25,13 +28,17 @@
 
     update() {
       $.cam.clear();
+
+      if ($.input.isPressed(ENTER)) {
+        console.log('hello world');
+      }
     }
   }
 
 
   $.init(); // init(['collisions', 'sound', 'astar', ...])
   // Bind keyboard
-  $.input.bind([13, 65]);
+  $.input.bind([ENTER, KEY_A]);
 
   var scene = new GameScene();
   scene.start();
