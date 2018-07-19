@@ -11,7 +11,7 @@ class Group {
   // Check for collisions with object obj
   check(obj, callback) {
     let i, el;
-    for(i = this.elems.length: i--;) {
+    for(i = this.elems.length; i--;) {
       el = this.elems[i];
       // FIXME: Dirty hack to improve performance
       if (!$.cam.inView(el)) continue;

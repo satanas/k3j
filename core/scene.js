@@ -1,18 +1,14 @@
 class Scene {
-  constructor() {
-    reset();
-  }
-
   reset() {
     this.exitFlag = false;
     this.startTime = 0;
     this.goTo = null;
-    $.time.delta = 0;
+    this.deltaTime = 0;
   }
 
   start() {
     this.reset();
-    this.init();
+    this.setup();
     this.loop();
   }
 
@@ -20,7 +16,7 @@ class Scene {
 
   loop() {
     // Calculate elapsed time
-    $.time.delta = (this.startTime !== 0) ? now() - this.startTime : 0;
+    this.deltaTime = (this.startTime !== 0) ? now() - this.startTime : 0;
 
     // Update Scene
     this.update();
@@ -28,7 +24,7 @@ class Scene {
     this.startTime = now();
 
     if (!this.exitFlag) {
-      $.raf(this.loop.bind(this));
+      raf(this.loop.bind(this));
     } else {
       return;
     }
@@ -36,5 +32,13 @@ class Scene {
 
   exit() {
     this.exitFlag = true;
+  }
+
+  // To be override by child class
+  setup() {
+  }
+
+  // To be override by child class
+  update() {
   }
 }
