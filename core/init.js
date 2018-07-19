@@ -26,20 +26,13 @@ $.init = function() {
   $.vh = $.canvas.height;
   // Viewport width
   $.vw = $.canvas.width;
+  // Canvas context for drawing on-screen
+  $.ctx = $.canvas.getContext('2d');
+
   $.groups = {};
   $.input = new Input();
-   // Canvas context for drawing on-screen
-  $.ctx = $.canvas.getContext('2d');
-  // Camera system
-  //$.cam = new Camera($.vw, $.vh);
+  $.cam = new Camera($.vw, $.vh);
   // coll, cd (Collision detection)
-
-  // Clear screen
-  $.ctx.clr = function(c) {
-    $.ctx.clearRect(0, 0, $.vw, $.vh);
-    $.ctx.fillStyle = c || "#000";
-    $.ctx.fillRect(0, 0, $.vw, $.vh);
-  }
 }
 
 function resize() {

@@ -83,4 +83,11 @@ class Camera {
       }
     });
   }
+
+  // Clear screen
+  clear() {
+    $.ctx.clearRect(0, 0, $.vw, $.vh);
+    $.ctx.fillStyle = c || "#000";
+    $.ctx.fillRect(0, 0, $.vw, $.vh);
+  }
 }
