@@ -8,7 +8,7 @@ class Rectangle {
   }
 
   update() {
-    this.bounds.update();
+    this.bounds.update(this);
   }
 
   center() {
@@ -17,7 +17,7 @@ class Rectangle {
 
   // Returns a new rect, offset by offsetX and offsetY
   static offset(rect, offsetX, offsetY) {
-    return new Rect(rect.x - offsetX, rect.y - offsetY, rect.w, rect.h);
+    return new Rectangle(rect.x - offsetX, rect.y - offsetY, rect.w, rect.h);
   }
 
   // TODO
@@ -29,13 +29,16 @@ class Rectangle {
 
 class Bounds {
   constructor(rect) {
-    this.rect = rect;
+    this.bottom = rect.y + rect.h;
+    this.top = rect.y;
+    this.left = rect.x;
+    this.right = rect.x + rect.w;
   }
 
-  update() {
-    this.bottom = this.rect.y + this.rect.h;
-    this.top = this.rect.y;
-    this.left = this.rect.x;
-    this.right = this.rect.x + this.rect.w;
+  update(rect) {
+    this.bottom = rect.y + rect.h;
+    this.top = rect.y;
+    this.left = rect.x;
+    this.right = rect.x + rect.w;
   }
 }

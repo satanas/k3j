@@ -28,7 +28,8 @@ class Camera {
   // Indicates if the object is inside the viewport.
   // Used to avoid rendering objects outside the view
   inView(obj) {
-    let r = Rect.offset(obj, this.offsetX, this.offsetY);
+    let r = Rectangle.offset(obj, this.offsetX, this.offsetY);
+
     return ((r.bounds.right >= 0 && r.bounds.right <= this.width) || (r.x >= 0 && r.x <= this.width)) &&
            ((r.bounds.bottom >= 0 && r.bounds.bottom <= this.height) || (r.y >= 0 && r.y <= this.height));
   }
@@ -79,7 +80,7 @@ class Camera {
 
     obj.forEach((o) => {
       if (this.inView(o)) {
-        o.render(Rect.offset(o, this.offsetX, this.offsetY));
+        o.render(Rectangle.offset(o, this.offsetX, this.offsetY));
       }
     });
   }

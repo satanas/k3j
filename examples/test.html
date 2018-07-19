@@ -21,17 +21,32 @@
   let ENTER = 13,
       KEY_A = 65;
 
+  class Player extends Sprite {
+    constructor() {
+      super(100, 100, 64, 64);
+    }
+
+    render(rect) {
+      $.ctx.save();
+      $.ctx.fillStyle = "#F00";
+      $.ctx.fillRect(rect.x, rect.y, this.w, this.h);
+      $.ctx.restore();
+    }
+  }
   class GameScene extends Scene {
     constructor() {
       super();
+      this.player = new Player();
     }
 
     update() {
-      $.cam.clear();
-
       if ($.input.isPressed(ENTER)) {
         console.log('hello world');
       }
+
+      $.cam.clear();
+
+      $.cam.render(this.player);
     }
   }
 
