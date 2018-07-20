@@ -74,11 +74,17 @@ class Camera {
     this.offsetY = this.target.y - ty;
   }
 
-  render(obj) {
-    if (!obj) return;
-    if (!(obj instanceof Array)) obj = [obj];
+  render(elem) {
+    let objs;
 
-    obj.forEach((o) => {
+    if (!elem) return;
+    if (elem instanceof Group) {
+      objs = elem.all();
+    } else if (!(elem instanceof Array)) {
+      objs = [elem];
+    }
+
+    objs.forEach((o) => {
       if (this.inView(o)) {
         o.render(Rectangle.offset(o, this.offsetX, this.offsetY));
       }

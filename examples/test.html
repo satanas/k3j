@@ -22,24 +22,34 @@
   const ENTER = 13,
         KEY_A = 65,
         LEFT = 37,
-        RIGHT = 39;
+        RIGHT = 39,
+        UP = 38,
+        DOWN = 40;
 
   class Player extends Sprite {
     constructor() {
       super(100, 100, 64, 64);
-      this.speed = 1;
+      this.speed = 0.25;
       this.anim = new Animator(['#0f0', '#fff'], 100);
     }
 
     update(dt) {
-      let dx = 0;
+      let dx = 0, dy = 0;
+      // Move left-right
       if ($.input.isPressed(LEFT)) {
         dx = -this.speed * dt;
-      }
-      if ($.input.isPressed(RIGHT)) {
+      } else if ($.input.isPressed(RIGHT)) {
         dx = this.speed * dt;
       }
+
+      // Move up-down
+      if ($.input.isPressed(UP)) {
+        dy = -this.speed * dt;
+      } else if ($.input.isPressed(DOWN)) {
+        dy = this.speed * dt;
+      }
       this.x += dx;
+      this.y += dy;
     }
 
     render(rect) {
@@ -49,10 +59,26 @@
       $.ctx.restore();
     }
   }
+
+  class Enemy extends Sprite {
+    constructor() {
+      super(200, 200, 64, 64);
+    }
+
+    render(rect) {
+      $.ctx.save();
+      $.ctx.fillStyle = "#00F";
+      $.ctx.fillRect(rect.x, rect.y, this.w, this.h);
+      $.ctx.restore();
+    }
+  }
+
   class GameScene extends Scene {
     constructor() {
       super();
       this.player = new Player();
+      $.groups.enemies = new Group();
+      $.groups.enemies.add(new Enemy());
     }
 
     update() {
@@ -64,6 +90,7 @@
 
       $.cam.clear();
 
+      $.cam.render($.groups.enemies);
       $.cam.render(this.player);
     }
   }
@@ -71,7 +98,7 @@
 
   $.init(); // init(['collisions', 'sound', 'astar', ...])
   // Bind keyboard
-  $.input.bind([ENTER, KEY_A, LEFT, RIGHT]);
+  $.input.bind([ENTER, KEY_A, LEFT, RIGHT, UP, DOWN]);
   $.cam.setWorldSize(1024, 1024);
 
   var scene = new GameScene();

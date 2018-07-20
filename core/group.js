@@ -3,6 +3,10 @@ class Group {
     this.elems = [];
   }
 
+  all() {
+    return this.elems;
+  }
+
   // Add element to the group
   add(e) {
     this.elems.push(e);
@@ -36,12 +40,6 @@ class Group {
         return del.indexOf(i) < 0;
       });
     }
-  }
-
-  // Render
-  // FIXME: Render outside the group?
-  render() {
-    $.cam.render(this.elems);
   }
 
   // Clear group

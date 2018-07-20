@@ -32,7 +32,7 @@ $.init = function() {
   $.groups = {};
   $.input = new Input();
   $.cam = new Camera($.vw, $.vh);
-  // coll, cd (Collision detection)
+  $.coll = new Collision(); // Collision detection
 }
 
 function resize() {
