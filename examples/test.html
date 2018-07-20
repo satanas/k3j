@@ -50,11 +50,21 @@
       }
       this.x += dx;
       this.y += dy;
+      this.color = '#f00';
+
+      // TODO: How to call this automagically?
+      this.bounds.update(this);
+
+      // Check collisions
+      $.coll.betweenGroup(this, $.groups.enemies, (player, enemy) => {
+        this.anim.update(dt);
+        this.color = this.anim.get();
+      });
     }
 
     render(rect) {
       $.ctx.save();
-      $.ctx.fillStyle = "#F00";
+      $.ctx.fillStyle = this.color;
       $.ctx.fillRect(rect.x, rect.y, this.w, this.h);
       $.ctx.restore();
     }
@@ -82,14 +92,13 @@
     }
 
     update() {
-      if ($.input.isPressed(ENTER)) {
-        console.log('hello world');
-      }
-
-      this.player.update(this.deltaTime);
-
       $.cam.clear();
 
+      // Update stuff
+      $.groups.enemies.update();
+      this.player.update(this.deltaTime);
+
+      // Render stuff
       $.cam.render($.groups.enemies);
       $.cam.render(this.player);
     }

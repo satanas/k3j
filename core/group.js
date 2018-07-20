@@ -12,17 +12,6 @@ class Group {
     this.elems.push(e);
   }
 
-  // Check for collisions with object obj
-  check(obj, callback) {
-    let i, el;
-    for(i = this.elems.length; i--;) {
-      el = this.elems[i];
-      // FIXME: Dirty hack to improve performance
-      if (!$.cam.inView(el)) continue;
-      if ($.coll.rect(obj, el)) callback(obj, el);
-    }
-  }
-
   update() {
     let del = [], i, el;
     for(i = this.elems.length; i--;) {

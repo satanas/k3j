@@ -7,4 +7,8 @@ class Sprite extends Rectangle {
   render(rect) {
     throw "Not Implemented";
   }
+
+  kill() {
+    this.alive = false;
+  }
 }

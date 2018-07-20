@@ -3,12 +3,23 @@ class Collision {
     return (obj.bounds && Object.keys(obj.bounds).length === 4);
   }
 
+  // Check for collisions of objects against any element from group
+  betweenGroup(obj1, group, callback) {
+    let i, obj2, elems = group.all();
+    for(i = elems.length; i--;) {
+      obj2 = elems[i];
+      // FIXME: Dirty hack to improve performance
+      if (!$.cam.inView(obj2)) continue;
+      if (this.between(obj1, obj2)) callback(obj1, obj2);
+    }
+  }
+
   between(obj1, obj2) {
     if (!this.isRect(obj1) || !this.isRect(obj2)) return false;
-    return !((obj1.bounds.bottom < obj2.bounds.top) ||
-            (obj1.bounds.top > obj2.bounds.bottom) ||
-            (obj1.bounds.left > obj2.bounds.right) ||
-            (obj1.bounds.right < obj2.bounds.left));
+    return (obj1.bounds.left < obj2.bounds.right &&
+            obj1.bounds.left > obj2.bounds.left &&
+            obj1.bounds.top < obj2.bounds.bottom &&
+            obj1.bounds.bottom > obj2.bounds.top);
   }
 
   faces(obj1, obj2) {

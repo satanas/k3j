@@ -7,10 +7,6 @@ class Rectangle {
     this.bounds = Bounds.fromRect(this);
   }
 
-  update() {
-    this.bounds.update(this);
-  }
-
   center() {
     return new Vector(this.x + (this.w / 2), this.y + (this.h / 2));
   }

@@ -12,9 +12,8 @@ class Animator {
     this.counter = 0;
   }
 
-  update() {
-    const time_delta = 1;
-    this.counter += time_delta; //$.time.delta;
+  update(dt) {
+    this.counter += dt;
     if (this.counter > this.duration) {
       this.counter = 0;
       this.frame = (this.frame + 1 > this.imgArr.length - 1) ? 0 : this.frame + 1;
