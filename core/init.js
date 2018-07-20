@@ -36,11 +36,12 @@ $.init = function() {
 }
 
 function resize() {
+  // TODO: Fix aspect ratio based on bigger measure
   let h = window.innerHeight;
   let w = h * $.canvas.width / $.canvas.height;
 
-  $.canvas.style.width = w+'px';
-  $.canvas.style.height = h+'px';
+  $.canvas.style.width = w + 'px';
+  $.canvas.style.height = h + 'px';
 }
 
 // Request Animation Frame
@@ -53,6 +54,5 @@ raf = window.requestAnimationFrame ||
 caf = window.cancelAnimationFrame ||
   window.mozCancelAnimationFrame;
 
-window.addEventListener('load', () => {
-  resize();
-}, false);
+window.addEventListener('load', resize, false);
+window.addEventListener('resize', resize, false);

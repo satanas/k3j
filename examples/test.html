@@ -16,17 +16,19 @@
   <script src="../core/group.js"></script>
   <script src="../core/sprite.js"></script>
   <script src="../core/animator.js"></script>
+  <script src="../core/collision.js"></script>
   <!-- End imports -->
 <script>
-  let ENTER = 13,
-      KEY_A = 65,
-      LEFT = 37,
-      RIGHT = 39;
+  const ENTER = 13,
+        KEY_A = 65,
+        LEFT = 37,
+        RIGHT = 39;
 
   class Player extends Sprite {
     constructor() {
       super(100, 100, 64, 64);
       this.speed = 1;
+      this.anim = new Animator(['#0f0', '#fff'], 100);
     }
 
     update(dt) {
@@ -70,6 +72,7 @@
   $.init(); // init(['collisions', 'sound', 'astar', ...])
   // Bind keyboard
   $.input.bind([ENTER, KEY_A, LEFT, RIGHT]);
+  $.cam.setWorldSize(1024, 1024);
 
   var scene = new GameScene();
   scene.start();

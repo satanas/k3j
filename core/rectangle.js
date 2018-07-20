@@ -4,7 +4,7 @@ class Rectangle {
     this.y = y;
     this.w = w;
     this.h = h;
-    this.bounds = new Bounds(this);
+    this.bounds = Bounds.fromRect(this);
   }
 
   update() {
@@ -28,11 +28,11 @@ class Rectangle {
 }
 
 class Bounds {
-  constructor(rect) {
-    this.bottom = rect.y + rect.h;
-    this.top = rect.y;
-    this.left = rect.x;
-    this.right = rect.x + rect.w;
+  constructor(top, bottom, left, right) {
+    this.top = top;
+    this.bottom = bottom;
+    this.left = left;
+    this.right = right;
   }
 
   update(rect) {
@@ -40,5 +40,9 @@ class Bounds {
     this.top = rect.y;
     this.left = rect.x;
     this.right = rect.x + rect.w;
+  }
+
+  static fromRect(rect) {
+    return new Bounds(rect.y, rect.y + rect.h, rect.x, rect.x + rect.w);
   }
 }
