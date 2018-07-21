@@ -1,3 +1,4 @@
+
 let $ = {},
     dbg = false,
     D = document;
@@ -30,8 +31,9 @@ $.init = function() {
   $.ctx = $.canvas.getContext('2d');
 
   $.groups = {};
-  $.input = new Input();
-  $.cam = new Camera($.vw, $.vh);
+  let targetElement = D.body;
+  $.input = Input.build(targetElement);
+  $.cam = new Camera($, $.vw, $.vh, 1024, 1024);
   $.coll = new Collision(); // Collision detection
 }
 

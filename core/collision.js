@@ -23,6 +23,7 @@ class Collision {
   }
 
   faces(obj1, obj2) {
+    let abs = Math.abs;
     return new Bounds(
       abs(obj1.bounds.bottom - obj2.bounds.top),
       abs(obj1.bounds.top - obj2.bounds.bottom),

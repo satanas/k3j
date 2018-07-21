@@ -16,12 +16,12 @@ class Scene {
 
   loop() {
     // Calculate elapsed time
-    this.deltaTime = (this.startTime !== 0) ? now() - this.startTime : 0;
+    this.deltaTime = (this.startTime !== 0) ? Date.now() - this.startTime : 0;
 
     // Update Scene
     this.update();
 
-    this.startTime = now();
+    this.startTime = Date.now();
 
     if (!this.exitFlag) {
       raf(this.loop.bind(this));

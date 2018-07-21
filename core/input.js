@@ -1,23 +1,49 @@
+const KeyboardActionMapping = {
+  'ENTER': 13,
+  'KEY_A': 65,
+  'LEFT': 37,
+  'RIGHT': 39,
+  'UP': 38,
+  'DOWN': 40,
+};
+
 class Input {
   constructor() {
     this.pressed = {};
     this.events = {};
+    this._keyDownHandler = null;
+    this._keyUpHandler = null;
+  }
 
-    D.body.addEventListener('keydown', (e) => {
-      if (e.keyCode in this.pressed) {
-        e.preventDefault();
-        this.events[e.keyCode] = -1;
-        this.pressed[e.keyCode] = 1;
-      }
-    });
+  static build(targetElement) {
+    var input = new Input();
+    input.addEventListeners(targetElement);
+    input.bind(Object.values(KeyboardActionMapping));
+    return input;
+  }
 
-    D.body.addEventListener('keyup', (e) => {
-      if (e.keyCode in this.pressed) {
-        e.preventDefault();
-        this.events[e.keyCode] = 1;
-        this.pressed[e.keyCode] = 0;
-      }
-    });
+  keyUp(e) {
+    if (e.keyCode in this.pressed) {
+      e.preventDefault();
+      this.events[e.keyCode] = -1;
+      this.pressed[e.keyCode] = 1;
+    }
+  }
+
+  keyDown(e) {
+    if (e.keyCode in this.pressed) {
+      e.preventDefault();
+      this.events[e.keyCode] = 1;
+      this.pressed[e.keyCode] = 0;
+    }
+  }
+
+  addEventListeners(targetElement) {
+    this._keyDownHandler = this.keyDown.bind(this);
+    targetElement.addEventListener('keydown', this._keyDownHandler);
+
+    this._keyUpHandler = this.keyUp.bind(this);
+    targetElement.addEventListener('keyup', this._keyUpHandler);
   }
 
   isPressed(c) {
