@@ -2,6 +2,7 @@ class Input {
   constructor() {
     this.pressed = {};
     this.events = {};
+    this.mousePos = null;
 
     D.body.addEventListener('keydown', (e) => {
       if (e.keyCode in this.events) {
@@ -67,6 +68,9 @@ class Input {
   // 3: right click
   bindMouse() {
     this.bind([1, 3]);
+    D.body.addEventListener('mousemove', (e) => {
+      this.mousePos = new Vector(e.clientX, e.clientY);
+    });
   }
 
   updateEvent(e, m, n, key) {
