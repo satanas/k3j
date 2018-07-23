@@ -48,6 +48,11 @@
       } else if ($.input.isPressed(DOWN)) {
         dy = this.speed * dt;
       }
+
+      // Mouse down
+      if ($.input.isLeftClick()) {
+        console.log('hahaha;');
+      }
       this.x += dx;
       this.y += dy;
       this.color = '#f00';
@@ -108,6 +113,7 @@
   $.init(); // init(['collisions', 'sound', 'astar', ...])
   // Bind keyboard
   $.input.bind([ENTER, KEY_A, LEFT, RIGHT, UP, DOWN]);
+  $.input.bindMouse();
   $.cam.setWorldSize(1024, 1024);
 
   var scene = new GameScene();
