@@ -1,11 +1,11 @@
 class Camera {
-  constructor(width, height, worldWidth, worldHeight) {
+  constructor(k3j, width, height, worldWidth, worldHeight) {
     this.width = width;
     this.height = height;
     this.offsetX = 0;
     this.offsetY = 0;
     this.target = 0;
-
+    this.k3j = k3j;
     this.setWorldSize(worldWidth, worldHeight);
   }
 
@@ -86,15 +86,15 @@ class Camera {
 
     objs.forEach((o) => {
       if (this.inView(o)) {
-        o.render(Rectangle.offset(o, this.offsetX, this.offsetY));
+        o.render.call(o, Rectangle.offset(o, this.offsetX, this.offsetY));
       }
     });
   }
 
   // Clear screen
   clear() {
-    $.ctx.clearRect(0, 0, $.vw, $.vh);
-    $.ctx.fillStyle = c || "#000";
-    $.ctx.fillRect(0, 0, $.vw, $.vh);
+    this.k3j.ctx.clearRect(0, 0, this.k3j.vw, this.k3j.vh);
+    this.k3j.ctx.fillStyle = c || "#000";
+    this.k3j.ctx.fillRect(0, 0, this.k3j.vw, this.k3j.vh);
   }
 }

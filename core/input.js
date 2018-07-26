@@ -3,27 +3,37 @@ class Input {
     this.pressed = {};
     this.events = {};
     this.mousePos = null;
+  }
 
-    D.body.addEventListener('keydown', (e) => {
+  static build(targetElement) {
+    var input = new Input();
+    input.addEventListeners(targetElement);
+    input.bind(Object.values(KeyboardMapping));
+    input.bindMouse(targetElement);
+    return input;
+  }
+
+  addEventListeners(targetElement) {
+    targetElement.addEventListener('keydown', (e) => {
       if (e.keyCode in this.events) {
         this.updateEvent(e, -1, 1);
       }
     });
 
-    D.body.addEventListener('keyup', (e) => {
+    targetElement.addEventListener('keyup', (e) => {
       if (e.keyCode in this.events) {
         this.updateEvent(e, 1, 0);
       }
     });
 
-    D.body.addEventListener('mousedown', (e) => {
+    targetElement.addEventListener('mousedown', (e) => {
       let key = e.button + 1;
       if (key in this.events) {
         this.updateEvent(e, -1, 1, key);
       }
     });
 
-    D.body.addEventListener('mouseup', (e) => {
+    targetElement.addEventListener('mouseup', (e) => {
       let key = e.button + 1;
       if (key in this.events) {
         this.updateEvent(e, 1, 0, key);
@@ -66,9 +76,9 @@ class Input {
   // of key collision.
   // 1: left click
   // 3: right click
-  bindMouse() {
+  bindMouse(targetElement) {
     this.bind([1, 3]);
-    D.body.addEventListener('mousemove', (e) => {
+    targetElement.addEventListener('mousemove', (e) => {
       this.mousePos = new Vector(e.clientX, e.clientY);
     });
   }

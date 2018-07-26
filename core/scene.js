@@ -1,4 +1,8 @@
 class Scene {
+  constructor(k3j) {
+    this.k3j = k3j;
+  }
+
   reset() {
     this.exitFlag = false;
     this.startTime = 0;
@@ -16,15 +20,15 @@ class Scene {
 
   loop() {
     // Calculate elapsed time
-    this.deltaTime = (this.startTime !== 0) ? now() - this.startTime : 0;
+    this.deltaTime = (this.startTime !== 0) ? Date.now() - this.startTime : 0;
 
     // Update Scene
     this.update();
 
-    this.startTime = now();
+    this.startTime = Date.now();
 
     if (!this.exitFlag) {
-      raf(this.loop.bind(this));
+      this.k3j.raf(this.loop.bind(this));
     } else {
       return;
     }
