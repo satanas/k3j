@@ -1,12 +1,3 @@
-const KeyboardActionMapping = {
-  'ENTER': 13,
-  'KEY_A': 65,
-  'LEFT': 37,
-  'RIGHT': 39,
-  'UP': 38,
-  'DOWN': 40,
-};
-
 class Input {
   constructor() {
     this.pressed = {};
@@ -17,7 +8,7 @@ class Input {
   static build(targetElement) {
     var input = new Input();
     input.addEventListeners(targetElement);
-    input.bind(Object.values(KeyboardActionMapping));
+    input.bind(Object.values(KeyboardMapping));
     input.bindMouse(targetElement);
     return input;
   }

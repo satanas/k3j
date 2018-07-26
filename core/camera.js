@@ -86,7 +86,7 @@ class Camera {
 
     objs.forEach((o) => {
       if (this.inView(o)) {
-        o.render(Rectangle.offset(o, this.offsetX, this.offsetY));
+        o.render.call(o, Rectangle.offset(o, this.offsetX, this.offsetY));
       }
     });
   }

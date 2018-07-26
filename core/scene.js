@@ -1,4 +1,8 @@
 class Scene {
+  constructor(k3j) {
+    this.k3j = k3j;
+  }
+
   reset() {
     this.exitFlag = false;
     this.startTime = 0;
@@ -24,7 +28,7 @@ class Scene {
     this.startTime = Date.now();
 
     if (!this.exitFlag) {
-      raf(this.loop.bind(this));
+      this.k3j.raf(this.loop.bind(this));
     } else {
       return;
     }

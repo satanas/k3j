@@ -1,4 +1,8 @@
 class Collision {
+  constructor(k3j) {
+    this.k3j = k3j;
+  }
+
   isRect(obj) {
     return (obj.bounds && Object.keys(obj.bounds).length === 4);
   }
@@ -9,7 +13,7 @@ class Collision {
     for(i = elems.length; i--;) {
       obj2 = elems[i];
       // FIXME: Dirty hack to improve performance
-      if (!$.cam.inView(obj2)) continue;
+      if (!this.k3j.camera.inView(obj2)) continue;
       if (this.between(obj1, obj2)) callback(obj1, obj2);
     }
   }

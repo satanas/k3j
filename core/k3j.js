@@ -1,9 +1,9 @@
 class K3J {
-  constructor(global, doc, input, collision) {
+  constructor(global, doc) {
     this.global = global;
     this.document = doc;
-    this.input = input;
-    this.collision = collision;
+    this.input = null;
+    this.collision = null;
     this.groups = {};
     this.caf = null;
     this._canvas = null;
@@ -16,14 +16,15 @@ class K3J {
   }
 
   static build(global, document) {
-    let collision = new Collision();
     let targetElement = document.body;
-    let input = Input.build(targetElement);
-
-    let k3j = new K3J(window, window.document, input, collision);
+    let k3j = new K3J(window, window.document);
 
     k3j.canvas = document.querySelector('canvas');
     k3j.addHandlers();
+
+    k3j.input = Input.build(targetElement);
+
+    k3j.collision = new Collision(k3j);
 
     return k3j;
   }
@@ -34,7 +35,7 @@ class K3J {
     this.vw = this.canvas.width;
     this.ctx = this.canvas.getContext('2d');
 
-    this.camera = new Camera(this.ctx, this.vw, this.vh, 1024, 1024);
+    this.camera = new Camera(this, this.vw, this.vh, 1024, 1024);
   }
 
   get canvas() {
@@ -55,15 +56,15 @@ class K3J {
     this.global.addEventListener('load', this._resizeHandler, false);
     this.global.addEventListener('resize', this._resizeHandler, false);
 
-    // Request Animation Frame
-    this.raf = this.global.requestAnimationFrame ||
-      this.global.webkitRequestAnimationFrame ||
-      this.global.mozRequestAnimationFrame ||
-      function(a){ window.setTimeout(a,1E3/60); }.bind(this.global, this.global); // TODO noansknv: silly
+    // Request Animation Frame - has to be executed in the context of window to work correctly.
+    this.raf = (window.requestAnimationFrame ||
+      window.webkitRequestAnimationFrame ||
+      window.mozRequestAnimationFrame ||
+      function(a){ window.setTimeout(a,1E3/60); }).bind(window);
 
-    // Cancel Animation Frame
-    this.caf = this.global.cancelAnimationFrame ||
-      this.global.mozCancelAnimationFrame;
+    // Cancel Animation Frame - has to be executed in the context of window to work correctly.
+    this.caf = (window.cancelAnimationFrame ||
+      window.mozCancelAnimationFrame).bind(window);
   }
 }
 
