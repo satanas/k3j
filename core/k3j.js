@@ -5,7 +5,7 @@ class K3J {
     this.input = input;
     this.collision = collision;
     this.groups = {};
-    this.caf = null
+    this.caf = null;
     this._canvas = null;
     this.vh = null;
     this.vw = null;
@@ -13,6 +13,19 @@ class K3J {
     this.camera = null;
     this._resizeHandler = null;
     this.raf = null;
+  }
+
+  static build(global, document) {
+    let collision = new Collision();
+    let targetElement = document.body;
+    let input = Input.build(targetElement);
+
+    let k3j = new K3J(window, window.document, input, collision);
+
+    k3j.canvas = document.querySelector('canvas');
+    k3j.addHandlers();
+
+    return k3j;
   }
 
   set canvas(canvas) {

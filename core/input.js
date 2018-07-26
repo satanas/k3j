@@ -11,8 +11,6 @@ class Input {
   constructor() {
     this.pressed = {};
     this.events = {};
-    this._keyDownHandler = null;
-    this._keyUpHandler = null;
   }
 
   static build(targetElement) {
@@ -39,11 +37,8 @@ class Input {
   }
 
   addEventListeners(targetElement) {
-    this._keyDownHandler = this.keyDown.bind(this);
-    targetElement.addEventListener('keydown', this._keyDownHandler);
-
-    this._keyUpHandler = this.keyUp.bind(this);
-    targetElement.addEventListener('keyup', this._keyUpHandler);
+    targetElement.addEventListener('keydown', this.keyDown.bind(this));
+    targetElement.addEventListener('keyup', this.keyUp.bind(this));
   }
 
   isPressed(c) {
