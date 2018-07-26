@@ -17,7 +17,7 @@ class K3J {
 
   static build(global, document) {
     let targetElement = document.body;
-    let k3j = new K3J(window, window.document);
+    let k3j = new K3J(global, global.document);
 
     k3j.canvas = document.querySelector('canvas');
     k3j.addHandlers();
@@ -57,14 +57,14 @@ class K3J {
     this.global.addEventListener('resize', this._resizeHandler, false);
 
     // Request Animation Frame - has to be executed in the context of window to work correctly.
-    this.raf = (window.requestAnimationFrame ||
-      window.webkitRequestAnimationFrame ||
-      window.mozRequestAnimationFrame ||
-      function(a){ window.setTimeout(a,1E3/60); }).bind(window);
+    this.raf = (this.global.requestAnimationFrame ||
+      this.global.webkitRequestAnimationFrame ||
+      this.global.mozRequestAnimationFrame ||
+      function(a){ window.setTimeout(a,1E3/60); }).bind(this.global);
 
     // Cancel Animation Frame - has to be executed in the context of window to work correctly.
-    this.caf = (window.cancelAnimationFrame ||
-      window.mozCancelAnimationFrame).bind(window);
+    this.caf = (this.global.cancelAnimationFrame ||
+      window.mozCancelAnimationFrame).bind(this.global);
   }
 }
 
