@@ -2,13 +2,14 @@
 <html>
 <head>
   <title>Pandemia</title>
-  <!-- link rel="stylesheet" href="style.css"/ -->
+  <link rel="stylesheet" href="style.css"/>
 </head>
 <body>
   <canvas id="c" width="1024" height="576"></canvas>
   <!-- Begin imports -->
   <script src="../core/init.js"></script>
   <script src="../core/input.js"></script>
+  <script src="../core/math.js"></script>
   <script src="../core/vector.js"></script>
   <script src="../core/rectangle.js"></script>
   <script src="../core/camera.js"></script>
@@ -51,7 +52,7 @@
 
       // Mouse down
       if ($.input.isLeftClick()) {
-        console.log('hahaha;');
+        console.log('hahaha', $.input.mousePos);
       }
       this.x += dx;
       this.y += dy;

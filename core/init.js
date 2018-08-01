@@ -2,22 +2,6 @@ let $ = {},
     dbg = false,
     D = document;
 
-let abs = Math.abs,
-    cos = Math.cos,
-    sin = Math.sin,
-    tan = Math.tan,
-    atan = Math.atan,
-    atan2 = Math.atan2,
-    ceil = Math.ceil,
-    floor = Math.floor,
-    max = Math.max,
-    min = Math.min,
-    pow = Math.pow,
-    sqrt = Math.sqrt,
-    round = Math.round,
-    rnd = Math.random,
-    now = Date.now,
-    PI = Math.PI;
 // Get canvas
 $.canvas = D.querySelector("canvas");
 
