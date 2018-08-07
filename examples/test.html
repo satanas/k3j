@@ -7,7 +7,6 @@
 <body>
   <canvas id="c" width="1024" height="576"></canvas>
   <!-- Begin imports -->
-  <script src="../core/init.js"></script>
   <script src="../core/input.js"></script>
   <script src="../core/math.js"></script>
   <script src="../core/vector.js"></script>
@@ -18,6 +17,8 @@
   <script src="../core/sprite.js"></script>
   <script src="../core/animator.js"></script>
   <script src="../core/collision.js"></script>
+  <script src="../core/text.js"></script>
+  <script src="../core/init.js"></script>
   <!-- End imports -->
 <script>
   const ENTER = 13,
@@ -52,7 +53,7 @@
 
       // Mouse down
       if ($.input.isLeftClick()) {
-        console.log('hahaha', $.input.mousePos);
+        //console.log('hahaha', $.input.mousePos);
       }
       this.x += dx;
       this.y += dy;
@@ -104,6 +105,7 @@
       $.groups.enemies.update();
       this.player.update(this.deltaTime);
 
+      $.txt.render('H', 100, 100, '#fff', 15);
       // Render stuff
       $.cam.render($.groups.enemies);
       $.cam.render(this.player);

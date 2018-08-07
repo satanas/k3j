@@ -17,6 +17,7 @@ $.init = function() {
   $.input = new Input();
   $.cam = new Camera($.vw, $.vh);
   $.coll = new Collision(); // Collision detection
+  $.txt = new TextRenderer();
 }
 
 function resize() {
