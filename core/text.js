@@ -1,14 +1,16 @@
+/**
+ * A class that implements asteroid's font using vectors
+ * https://www.dafont.com/hyperspace.font
+ */
 class TextRenderer {
   constructor() {
-    // Add segments to variables?
-    // first vertical segment, middle line, top line, bottom line
     // Individual segments
     let lv = [0,0,0,1], // left vertical
         rv = [1,0,1,1], // right vertical
         th = [0,0,1,0], // top horizontal
         mh = [0,1/2,1,1/2], // middle horizontal
         bh = [0,1,1,1], // bottom horizontal
-        // Base letters
+        // Common base for letters
         f = [lv, th, [0,1/2,3/4,1/2]],
         l = [lv, bh],
         c = l.concat([th]),
@@ -65,18 +67,17 @@ class TextRenderer {
   render(text, x, y, color, fontWidth) {
     // Render single-line words
     let i, m, n, letter, seg, fontHeight, offset, spacing;
-    fontHeight = fontWidth * 3 / 2;
+    fontHeight = floor(fontWidth * 3 / 2);
     offset = 0;
-    spacing = fontWidth / 3;
+    spacing = floor(fontWidth / 3);
 
     $.ctx.save();
     $.ctx.strokeStyle = color;
-    //$.ctx.lineJoin = "round";
+    $.ctx.beginPath();
     // Render each letter
     for (i = 0; i < text.length; i++) {
       letter = this.font[text.charAt(i)];
       // Render each segment of a letter
-      //$.ctx.beginPath();
       for (m = 0; m < letter.length; m++) {
         seg = letter[m];
         $.ctx.moveTo(floor(x + offset + (seg[0] * fontWidth)), floor(y + (seg[1] * fontHeight)));

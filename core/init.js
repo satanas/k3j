@@ -1,5 +1,5 @@
 let $ = {},
-    dbg = false,
+    debug = false,
     D = document;
 
 // Get canvas

@@ -4,6 +4,9 @@ class Scene {
     this.startTime = 0;
     this.goTo = null;
     this.deltaTime = 0;
+    this.elapsedTime = 0;
+    this.frames = 0;
+    this.fps = 0;
   }
 
   start() {
@@ -22,6 +25,22 @@ class Scene {
     this.update();
 
     this.startTime = now();
+
+    //-- DEBUG_START --
+    if (debug) {
+      this.frames += 1;
+      this.elapsedTime += this.deltaTime;
+      if (this.elapsedTime >= 1000) {
+        this.fps = 1000 * this.frames / this.elapsedTime;
+        this.frames = 0;
+        this.elapsedTime = 0;
+      }
+      $.ctx.save();
+      $.ctx.fillStyle = '#fff';
+      $.ctx.fillText('FPS: ' + floor(this.fps), 10, 10);
+      $.ctx.restore();
+    }
+    //-- DEBUG_END --
 
     if (!this.exitFlag) {
       raf(this.loop.bind(this));
