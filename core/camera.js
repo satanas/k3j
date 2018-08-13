@@ -5,6 +5,7 @@ class Camera {
     this.offsetX = 0;
     this.offsetY = 0;
     this.target = 0;
+    this.afterUpdate = [];
 
     this.setWorldSize(worldWidth, worldHeight);
   }
@@ -72,6 +73,11 @@ class Camera {
 
     this.offsetX = this.target.x - tx;
     this.offsetY = this.target.y - ty;
+
+    for (let i = 0; i < this.afterUpdate.length; i++) {
+      console.log('i', i);
+      this.afterUpdate[i].bind(this)();
+    }
   }
 
   render(elem) {

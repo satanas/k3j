@@ -1,10 +1,3 @@
-let $ = {},
-    debug = false,
-    D = document;
-
-// Get canvas
-$.canvas = D.querySelector("canvas");
-
 $.init = function() {
   // Viewport height
   $.vh = $.canvas.height;
@@ -18,6 +11,10 @@ $.init = function() {
   $.cam = new Camera($.vw, $.vh);
   $.coll = new Collision(); // Collision detection
   $.txt = new TextRenderer();
+
+  for (var i=0; i < $.mod.length; i++) {
+    $.mod[i].call(this);
+  }
 }
 
 function resize() {
