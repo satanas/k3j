@@ -73,6 +73,7 @@ class TextRenderer {
 
     $.ctx.save();
     $.ctx.strokeStyle = color;
+    $.ctx.lineWidth = 2;
     $.ctx.beginPath();
     // Render each letter
     for (i = 0; i < text.length; i++) {
