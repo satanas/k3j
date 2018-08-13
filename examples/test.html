@@ -7,6 +7,7 @@
 <body>
   <canvas id="c" width="1024" height="576"></canvas>
   <!-- Begin imports -->
+  <script src="../core/setup.js"></script>
   <script src="../core/input.js"></script>
   <script src="../core/math.js"></script>
   <script src="../core/vector.js"></script>
@@ -105,6 +106,7 @@
       // Update stuff
       $.groups.enemies.update();
       this.player.update(this.deltaTime);
+      $.cam.update(this.deltaTime);
 
       $.txt.render('ABCDEFGHIJKLMNOPQRSTUVWXYZ', 10, 40, '#fff', 15);
       $.txt.render('0123456789.:@', 10, 70, '#fff', 15);

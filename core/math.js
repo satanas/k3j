@@ -26,5 +26,5 @@ let abs = Math.abs,
     },
     // Choose random element from array
     rnda = function(e) {
-      return e[rndr(0, e.length)];
+      return e[rndi(0, e.length)];
     };

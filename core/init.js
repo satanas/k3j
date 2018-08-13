@@ -1,10 +1,3 @@
-let $ = {},
-    debug = false,
-    D = document;
-
-// Get canvas
-$.canvas = D.querySelector("canvas");
-
 $.init = function() {
   // Viewport height
   $.vh = $.canvas.height;
