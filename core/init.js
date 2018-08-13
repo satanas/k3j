@@ -21,12 +21,12 @@ $.init = function() {
 }
 
 function resize() {
-  // TODO: Fix aspect ratio based on bigger measure
-  let h = window.innerHeight;
-  let w = h * $.canvas.width / $.canvas.height;
+  let w = floor(window.innerWidth),
+      h = floor(w * 9 / 16);
 
   $.canvas.style.width = w + 'px';
   $.canvas.style.height = h + 'px';
+  $.canvas.style.marginTop = floor((window.innerHeight - h) / 2) + 'px';
 }
 
 // Request Animation Frame
